@@ -13,6 +13,11 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    axios.get('/repos')
+    .then(data => )
+  }
+
   search(term) {
     console.log(`${term} was searched`);
 

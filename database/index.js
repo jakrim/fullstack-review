@@ -12,28 +12,27 @@ let repoSchema = mongoose.Schema({
 
 let Repo = mongoose.model('Repo', repoSchema);
 
-let save = repos => {
-  // const repoNames = {};
-
-  // array of github objects
-  // loop through each item
-  // populate an object
-
+let save = (body, callback) => {
+  const repos = JSON.parse(body);
   for (var i = 0; i < repos.length; i++) {
-    var reposObj = {};
+    let reposObj = {};
+    reposObj.github_name = repos[i].owner.login;
+    reposObj.repo_name = repos[i].name;
+    reposObj.description = repos[i].description;
+    reposObj.forks = repos[i].forks;
 
-    obj.github_name = repos[i].owner.login;
-    obj.repo_name = repos[i].name;
-    obj.description = repos[i].description;
-    obj.forks = repo[i].forks;
+    let repo = new Repo(reposObj);
+
+    // console.log('+THIS IS REPOO', repo);
+
+    repo.save((err, repo) => {
+      if (err) {
+        callback(err);
+      } else {
+        console.log('repo saved');
+      }
+    });
   }
-  // repos.forEach(repo => {
-  //   repoNames.push(repo.owner.login, repo.name, repo.description, repo.forks);
-  // });
-
-  // Repo.create({ repos });
-
-  let repo = new Repo(reposObj);
 };
 
 let find = callback => {

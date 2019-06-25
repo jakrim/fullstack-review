@@ -11,13 +11,11 @@ let getReposByUsername = (username, callback) => {
       Authorization: `token ${config.TOKEN}`
     }
   };
-
   request.get(options, (err, response, body) => {
     if (err) callback(err);
-
-    const repos = JSON.parse(body);
-
-    callback(repos);
+    else {
+      callback(null, body);
+    }
   });
 };
 
