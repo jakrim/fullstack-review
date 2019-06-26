@@ -1,9 +1,18 @@
 import React from 'react';
+import ReactEntry from './RepoEntry.jsx';
 
-const RepoList = props => (
+const RepoList = ({ repos }) => (
   <div>
-    <h4> Repo List Component </h4>
-    There are {props.repos.length} repos.
+    {/* {console.log('this is repos', repos)} */}
+    <div>
+      <h4> Repo List Component </h4>
+      There are {repos.length} repos.
+    </div>
+    <div>
+      {repos.map(repo => {
+        return <ReactEntry repo={repo} />;
+      })}
+    </div>
   </div>
 );
 
